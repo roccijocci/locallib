@@ -4,11 +4,6 @@ import uuid
 # Create your models here.
 
 #models representing a book genre
-class Genre(models.Model):
-	name_of_genre = models.CharField(max_length=200, help_text='Enter a book genre(e.g. Science Fiction)')
-
-	def __str__(self):
-		return self.name_of_genre
 
 class Language(models.Model):
 	name_of_language = models.CharField(max_length = 200, help_text='The Language of the book is?')
@@ -16,6 +11,13 @@ class Language(models.Model):
 	def __str__(self):
 			return self.name_of_language
 	
+
+class Genre(models.Model):
+	name_of_genre = models.CharField(
+		max_length=200, help_text='Enter a book genre(e.g. Science Fiction)')
+
+	def __str__(self):
+		return self.name_of_genre
 
 #model representing a book
 class Book(models.Model):
@@ -33,6 +35,11 @@ class Book(models.Model):
 	
 	def get_absolute_url(self):
 		return reverse('book-detail', args= [str(self.id)])
+
+	def display_genre(self):
+		#create a string for the genre to be displayed in the Admin Area
+		return ', '.join(genre.name for genre in self.genre.all()[:3])
+	display_genre.short_description = 'Genre'
 
 #book instance model  this model represents a copy of a book.
 class BookInstance(models.Model):
