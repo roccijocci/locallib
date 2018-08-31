@@ -38,7 +38,7 @@ class Book(models.Model):
 
 	def display_genre(self):
 		#create a string for the genre to be displayed in the Admin Area
-		return ', '.join(genre.name for genre in self.genre.all()[:3])
+		return ', '.join(genre.name_of_genre for genre in self.genre.all()[:3])
 	display_genre.short_description = 'Genre'
 
 #book instance model  this model represents a copy of a book.
