@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+import uuid
 # Create your models here.
 
 #models representing a book genre
@@ -24,3 +25,31 @@ class Book(models.Model):
 	
 	def get_absolute_url(self):
 		return reverse('book-detail', args= [str(self.id)])
+
+#book instance model  this model represents a copy of a book.
+class BookInstance(models.Model):
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='unique ID for this particular book across the whole library')
+	book = models.ForeignKeyField('Book', on_delete=models.SET_NULL, null=True)
+	imprint = models.Charfield(max_length=200)
+	due_back = models.DateField(null=True, blank=True)
+	
+	LOAN_STATUS = (
+		('m', 'Maintenance'),
+		('o', 'On loan'),
+		('a', 'Available'),
+		('r','Reserved'),
+	)
+
+	status = models.CharField(
+		max_length=1,
+		choices=LOAN_STATUS,
+		blank=True,
+		default='m',
+		help_text = 'Book Availability'
+	)
+		
+		def __str__(self):
+				return 
+
+		def __unicode__(self):
+				return 
