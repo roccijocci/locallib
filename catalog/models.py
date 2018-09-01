@@ -68,7 +68,7 @@ class BookInstance(models.Model):
 	def __str__(self):
 		#string for representing the Model object
 		# return f'{self.id} ({self.book.title})'
-		return '{0} ({1})'.format(self.id, self.book.title)
+		return '{0} ({1}) ({2} | {3})'.format(self.id, self.book.title, self.status, self.due_back)
 
 #Author Models
 
