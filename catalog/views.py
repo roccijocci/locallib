@@ -5,8 +5,9 @@ from catalog.models import Book, Author , BookInstance, Genre
 # Create your views here.
 class BookListView(generic.ListView):
 		model = Book
-		context_object_name = 'booksview'
-		queryset = Book.objects.filter(title__icontains='Master')[:5]
+		context_object_name = 'book_list'
+		# queryset = Book.objects.filter(title__icontains='Master')[:5]
+		queryset = Book.objects.all()
 		template_name = "books/book_list.html"
 
 		def get_context_data(self,**kwargs):
