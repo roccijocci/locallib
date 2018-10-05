@@ -15,6 +15,10 @@ class BookListView(generic.ListView):
 			context['some_data'] = 'This is just some data'
 			return context
 
+class AuthorListView(generic.ListView):
+	model = Author
+	
+
 class BookDetailView(generic.DetailView):
 		model = Book
 		# template_name=''
