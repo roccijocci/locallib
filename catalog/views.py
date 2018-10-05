@@ -12,12 +12,11 @@ class BookListView(generic.ListView):
 
 		def get_context_data(self,**kwargs):
 			context = super(BookListView, self).get_context_data(**kwargs)
-			context['some_data'] = 'This is just some data'
+			# context['some_data'] = 'This is just some data'
 			return context
 
-class AuthorListView(generic.ListView):
-	model = Author
-	
+
+
 
 class BookDetailView(generic.DetailView):
 		model = Book
@@ -47,4 +46,19 @@ def index(request):
 		# 'num_of_books_with_a': num_of_books_with_a
 	}
 
-	return render(request,'index.html',context=context)
+	return render(request, 'index.html', context=context)
+	
+
+class AuthorListView(generic.ListView):
+		model = Author
+		context_object_name = 'author_list'
+		queryset = Author.objects.all()
+
+		def get_context_data(self, **kwargs):
+			context = super(AuthorListView, self).get_context_data(**kwargs)
+			return context
+
+class AuthorDetailView(generic.DetailView):
+		model = Author
+		#template_name = ".html"
+	#def index():
