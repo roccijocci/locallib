@@ -53,12 +53,9 @@ class AuthorListView(generic.ListView):
 		model = Author
 		context_object_name = 'author_list'
 		queryset = Author.objects.all()
+		template_name =  'authors/author_list.html'
 
 		def get_context_data(self, **kwargs):
 			context = super(AuthorListView, self).get_context_data(**kwargs)
 			return context
 
-class AuthorDetailView(generic.DetailView):
-		model = Author
-		#template_name = ".html"
-	#def index():

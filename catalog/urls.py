@@ -7,4 +7,6 @@ urlpatterns = [
 	path('authors/', views.AuthorListView.as_view(),  name = 'authors'),
 	# path('books/<uuid:pk>',views.BookDetailView.as_view(), name = 'book-detail'),
 	re_path(r'^book/(?P<pk>\d+)$', views.BookDetailView.as_view(), name='book-detail'),
+	re_path(r'^author/(?P<pk>\d+)$', views.BookDetailView.as_view(), name='book-detail'),
+
 ]
