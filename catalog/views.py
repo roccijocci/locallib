@@ -3,48 +3,19 @@ from django.views import generic
 from catalog.models import Book, Author , BookInstance, Genre
 
 # Create your views here.
-class BookListView(generic.ListView):
-		model = Book
-		# context_object_name = 'book_list'
-		# # queryset = Book.objects.filter(title__icontains='Master')[:5]
-		# queryset = Book.objects.all()
-		# template_name = "books/book_list.html"
 
-		# def get_context_data(self,**kwargs):
-		# 	context = super(BookListView, self).get_context_data(**kwargs)
-		# 	# context['some_data'] = 'This is just some data'
-		# 	return context
-
-
-class AuthorListView(generic.ListView):
-		model = Author
-		# context_object_name = 'author_list'
-		# queryset = Author.objects.all()
-		# template_name = 'authors/author_list.html'
-
-		# def get_context_data(self, **kwargs):
-		# 	context = super(AuthorListView, self).get_context_data(**kwargs)
-		# 	return context
-
-
-
-class BookDetailView(generic.DetailView):
-		model = Book
-		# template_name=''
-
-class AuthorDetailView(generic.DetailView):
-		model = Author
 
 def index(request):
 	# view function for homepage of site
-	
+
 	#Generate counts of some of the main objects
 	num_books = Book.objects.all().count()
 	num_instances = BookInstance.objects.all().count()
-	
+
 	#num AvailableBooks (status = 'a')
-	num_instances_available = BookInstance.objects.filter(status__exact='a').count()
-	
+	num_instances_available = BookInstance.objects.filter(
+		status__exact='a').count()
+
 	num_authors = Author.objects.count()
 
 	num_genres = Genre.objects.all().count()
@@ -61,4 +32,37 @@ def index(request):
 	}
 
 	return render(request, 'index.html', context=context)
-	
+
+
+
+class BookListView(generic.ListView):
+		model = Book
+		context_object_name = 'book_list'
+		# queryset = Book.objects.filter(title__icontains='Master')[:5]
+		queryset = Book.objects.all()
+		template_name = "books/book_list.html"
+
+		def get_context_data(self,**kwargs):
+			context = super(BookListView, self).get_context_data(**kwargs)
+			return context
+
+
+class AuthorListView(generic.ListView):
+		model = Author
+		context_object_name = 'author_list'
+		queryset = Author.objects.all()
+		template_name = 'authors/author_list.html'
+
+		def get_context_data(self, **kwargs):
+			context = super(AuthorListView, self).get_context_data(**kwargs)
+			return context
+
+
+
+class BookDetailView(generic.DetailView):
+		model = Book
+		# template_name=''
+
+class AuthorDetailView(generic.DetailView):
+		model = Author
+
