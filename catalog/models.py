@@ -84,7 +84,6 @@ class Author(models.Model):
 		
 	def get_absolute_url(self):
 		#returns the url to access a particular author instance
-		# TODO Check get_absolute_url
 		return reverse('author-detail', args=[str(self.id)])
 
 	def __str__(self):

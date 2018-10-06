@@ -5,22 +5,36 @@ from catalog.models import Book, Author , BookInstance, Genre
 # Create your views here.
 class BookListView(generic.ListView):
 		model = Book
-		context_object_name = 'book_list'
-		# queryset = Book.objects.filter(title__icontains='Master')[:5]
-		queryset = Book.objects.all()
-		template_name = "books/book_list.html"
+		# context_object_name = 'book_list'
+		# # queryset = Book.objects.filter(title__icontains='Master')[:5]
+		# queryset = Book.objects.all()
+		# template_name = "books/book_list.html"
 
-		def get_context_data(self,**kwargs):
-			context = super(BookListView, self).get_context_data(**kwargs)
-			# context['some_data'] = 'This is just some data'
-			return context
+		# def get_context_data(self,**kwargs):
+		# 	context = super(BookListView, self).get_context_data(**kwargs)
+		# 	# context['some_data'] = 'This is just some data'
+		# 	return context
 
+
+class AuthorListView(generic.ListView):
+		model = Author
+		# context_object_name = 'author_list'
+		# queryset = Author.objects.all()
+		# template_name = 'authors/author_list.html'
+
+		# def get_context_data(self, **kwargs):
+		# 	context = super(AuthorListView, self).get_context_data(**kwargs)
+		# 	return context
 
 
 
 class BookDetailView(generic.DetailView):
 		model = Book
 		# template_name=''
+
+class AuthorDetailView(generic.DetailView):
+		model = Author
+
 def index(request):
 	# view function for homepage of site
 	
@@ -48,14 +62,3 @@ def index(request):
 
 	return render(request, 'index.html', context=context)
 	
-
-class AuthorListView(generic.ListView):
-		model = Author
-		context_object_name = 'author_list'
-		queryset = Author.objects.all()
-		template_name =  'authors/author_list.html'
-
-		def get_context_data(self, **kwargs):
-			context = super(AuthorListView, self).get_context_data(**kwargs)
-			return context
-
