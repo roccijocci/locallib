@@ -17,6 +17,9 @@ def index(request):
 		status__exact='a').count()
 
 	num_authors = Author.objects.count()
+	# Number of visits to this view, as counted by the session variable.
+	num_visits = request.session.get('num_visits', 0)
+	request.session['num_visits'] = num_visits + 1
 
 	num_genres = Genre.objects.all().count()
 
@@ -28,6 +31,7 @@ def index(request):
 		'num_instances_available': num_instances_available,
 		'num_authors': num_authors,
 		'num_genres': num_genres,
+		'num_visits': num_visits,
 		# 'num_of_books_with_a': num_of_books_with_a
 	}
 
