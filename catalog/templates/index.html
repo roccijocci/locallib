@@ -12,6 +12,7 @@
 		<li><strong>Copies Available: </strong>{{num_instances_available}}</li>
 		<li><strong>Authors: </strong>{{num_authors}} </li>
 		<li><strong>Genres Available: </strong>{{num_genres}}</li>
-		<!-- <li><strong>Authors with Name <em>James</em>: </strong>{{num_of_books_with_a}}</li> -->
 	</ul>
+	<p> You have visited this Page {{num_visits}} {% if num_visits == 1 %}
+	time{% else %} times {% endif %}. </p>
 {% endblock  %}
