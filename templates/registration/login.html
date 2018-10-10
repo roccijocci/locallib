@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+	<p>Username and Password Mismatch. Please try again</p>
+{% endif %}
+
+{% if next %}
+	{% if user.is_authenticated %}
+		<p>Your Account doesn't have access to this Page. To Proceed, please login with an account that has access</p>
+	{% else %}
+		<p>Please Login to see this Page.</p>
+	{% endif %}
+{% endif %}
+
+<form action="{% url 'login'%}" method="post">
+{% csrf_token %}
+	<div>
+		<td>{{ form.username.label_tag }}</td>
+		<td>{{ form.username }}</td>
+	</div>
+	<div>
+		<td>{{ form.password.label_tag }}</td>
+		<td>{{ form.password }}</td>
+	</div>
+	<div>
+		<input type="submit" value="login">
+		<input type="hidden" name="next" value="{{ next }}">
+	</div>
+</form>
+
+{# Assumes you set the password recovery view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost Password </a></p>
+
+{% endblock %}
