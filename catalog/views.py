@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
 from catalog.models import Book, Author , BookInstance, Genre
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required
 def index(request):
 	# view function for homepage of site
 
